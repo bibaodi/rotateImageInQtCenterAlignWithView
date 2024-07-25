@@ -11,7 +11,7 @@ ImageItem::ImageItem() : m_angle(30), m_scale(1.0) {
   setAcceptedMouseButtons(Qt::AllButtons);
   setAcceptHoverEvents(true);
   setFlag(ItemAcceptsInputMethod, true);
-  QImage img("/home/eton/Pictures/duck.jpeg");
+  QImage img(":/imgs/duck.jpeg"); //'qrc:/' will failed
   qDebug() << img.size();
   img = img.scaledToWidth(200, Qt::SmoothTransformation);
   m_img = img;

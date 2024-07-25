@@ -7,19 +7,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
-qt_add_executable(app240725-image-rotate
+set(targetApp "app240725-image-rotate")
+qt_add_executable(${targetApp}
     main.cpp
     imageitem.cpp
     imageitem.h
 )
 
-qt_add_qml_module(app240725-image-rotate
+qt_add_qml_module(${targetApp}
     URI 240725-image-rotate
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES main.qml
 )
 
-set_target_properties(app240725-image-rotate PROPERTIES
+qt_add_resources(${targetApp} "app_images"
+    PREFIX "/"
+    FILES "imgs/duck.jpeg"
+)
+
+set_target_properties(${targetApp} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -27,9 +33,9 @@ set_target_properties(app240725-image-rotate PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(app240725-image-rotate
+target_link_libraries(${targetApp}
     PRIVATE Qt6::Quick)
 
-install(TARGETS app240725-image-rotate
+install(TARGETS ${targetApp}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
